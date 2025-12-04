@@ -1,6 +1,7 @@
 .header {
   width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 12px 24px;
   background-color: #fff7eb;
@@ -28,13 +29,17 @@
   margin-left: 12px;
 }
 
-
-
 .main-container {
-  width: 100%;
+  width: 50%;
   display: flex;
-  margin: 25px;
+  flex-direction: column;
+  padding: 20px;
+  border-right: 3px solid #f97316;
+  margin: 0;
+  min-height: 100vh;
+  overflow-y: auto;
 }
+
 
 .ingredient-form {
   display: flex;
@@ -46,8 +51,8 @@
 
 .ingredient-input {
   padding: 12px 16px;
-  height: 15px;
-  width: 400px;
+  height: 35px;
+  width: 500px;
   font-size: 1rem;
   border: 2px solid #f97316;
   border-radius: 8px;
@@ -67,8 +72,8 @@
   font-weight: 600;
   font-size: 1.1rem;
   border: none;
-  width: 150px;
-  height: 42px;
+  width: 175px;
+  height: 60px;
   border-radius: 15px;
   cursor: pointer;
   transition: 0.2s ease;
@@ -78,3 +83,31 @@
   background-color: #b94600;
 }
 
+.ign-list {
+  list-style: none;
+  padding: 0;
+  margin: 30px 10px;
+  width: 500px;
+}
+
+.ign-list li {
+  background: #fff7eb;
+  border-left: 6px solid #f97316;
+  padding: 14px 18px;
+  font-size: 1.25rem;
+  color: #d35400;
+  font-weight: 500;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease-in-out;
+}
+
+.ign-list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  border-left-color: #d35400;
+}

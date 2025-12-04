@@ -3,15 +3,15 @@ import Ingredients from './Ingredients'
 
 
 export default function Main() {
-  const [ingredientsList, setIngredientsList]=useState(["pepper", "salt", "rice"]);
+  const [ingredientsList, setIngredientsList]=useState([]);
   const [ingredient, setIngredient]=useState("");
-
   function HandleSubmit(event)
   {
     event.preventDefault();
     const formData=new FormData(event.currentTarget);
     const newIngredient=formData.get("ingredient");
     setIngredientsList(prev => [...prev, newIngredient]);
+    setIngredient((e) => "")
   };
 
   const InElements=ingredientsList.map((ing) => {
@@ -21,22 +21,28 @@ export default function Main() {
   return (
     <div className="main-container">
 
-      <form className="ingredient-form" onSubmit={HandleSubmit}>
+      <form className="ingredient-form" onSubmit={HandleSubmit} onEnter>
         <input
           type="text"
           placeholder="eg. Pepper"
           value={ingredient}
-          onChange={(e) => setIngredient(e.target.value)}
+          onChange={(e) => 
+            {
+                console.log(e);
+                setIngredient(e.target.value)
+            }}
           className="ingredient-input"
           aria-label="Add ingredient"
           name="ingredient"
         />
         <button type="submit" className="add-btn">
-          Add
+          ADD
         </button>
       </form>
 
-      <ul>
+      <hr/>
+
+      <ul className="ign-list">
         {InElements}
       </ul>
 

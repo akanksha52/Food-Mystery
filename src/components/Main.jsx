@@ -1,13 +1,11 @@
 import { useState } from "react";
 
 export default function Main() {
-  const [ingredient, setIngredient] = useState("");
+  const [ingredient, setIngredient]=useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (ingredient.trim() === "") return;
-
-    console.log("Added ingredient:", ingredient);
+    if (ingredient.trim()==="") return;
     setIngredient("");
   }
 
@@ -16,14 +14,13 @@ export default function Main() {
       <form className="ingredient-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter an ingredient..."
+          placeholder="eg. Pepper"
           value={ingredient}
           onChange={(e) => setIngredient(e.target.value)}
           className="ingredient-input"
         />
-
         <button type="submit" className="add-btn">
-          Add Ingredient
+          Add
         </button>
       </form>
     </div>

@@ -141,50 +141,58 @@ body {
 }
 
 .recipe-box {
-  margin-top: 40px;
+  margin-left: 40px;
+  margin-top: 45px;
+  padding: 36px 32px;
   width: 100%;
-  max-width: 700px;
-  padding: 28px 24px;
-  background: #fff5e8;
-  border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  max-width: 780px;
+  background: #fff7ed;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.09);
   text-align: center;
-  animation: fadeIn 0.4s ease;
+  border: 2px solid #f2c49a;
+  animation: fadeUp 0.5s ease;
 }
 
 .recipe-title {
-  font-size: 1.9rem;
-  color: #d35400;
+  font-size: 2rem;
   margin-bottom: 12px;
+  color: #c65000;
   font-weight: 700;
 }
 
 .recipe-subtext {
-  font-size: 1.1rem;
-  color: #7a5a42;
-  margin-bottom: 24px;
+  font-size: 1.15rem;
+  margin-bottom: 28px;
+  color: #6a523d;
+  line-height: 1.45;
 }
 
 .recipe-btn {
-  padding: 14px 32px;
-  background: #d35400;
-  color: #fff;
+  padding: 15px 34px;
+  background: linear-gradient(145deg, #d35400, #be4a00);
+  color: white;
   border: none;
   font-size: 1.2rem;
-  border-radius: 12px;
-  cursor: pointer;
   font-weight: 600;
-  transition: 0.2s ease;
-  box-shadow: 0 4px 12px rgba(211, 84, 0, 0.25);
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(211, 84, 0, 0.3);
+  transition: 0.25s ease;
 }
 
 .recipe-btn:hover {
-  background: #bb4800;
   transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(211, 84, 0, 0.38);
 }
 
-/* Smooth fade-in effect */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

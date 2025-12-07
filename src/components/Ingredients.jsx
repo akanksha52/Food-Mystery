@@ -1,8 +1,8 @@
 export default function Ingredients(props)
 {
     return (
-        <div>
+        <ul>
             <li>{props.name}</li>
-        </div>
+        </ul>
     )
 }

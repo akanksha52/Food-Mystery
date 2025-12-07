@@ -12,7 +12,7 @@ export default function List(props)
 
           <ul className="ign-list">{InElements}</ul>
 
-          {props.ingredientsList.length>4 && (
+          {props.ingredientsList.length>3 && (
             <div className="recipe-box">
               <h2 className="recipe-title">Ready for a Recipe?</h2>
               <p className="recipe-subtext">

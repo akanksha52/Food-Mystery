@@ -53,7 +53,7 @@ body {
   width: 100%;
   max-width: 900px;
   margin: 40px auto;
-  padding: 0 20px;
+  padding: 0 80px;
 }
 
 /* ---------------- SEARCH BAR ---------------- */
@@ -124,62 +124,67 @@ body {
 }
 
 .ign-list li {
-  background: #fff5e8;
-  padding: 16px 20px;
-  border-radius: 14px;
+  background: #fff7ed;
+  padding: 18px 24px;
+  border-radius: 18px;
   font-size: 1.2rem;
   color: #d35400;
-  font-weight: 500;
-  border-left: 6px solid #f28a2e;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-  transition: 0.2s ease;
+  font-weight: 600;
+  border-left: 7px solid #ff8a1f;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  transition: 0.25s ease;
 }
 
 .ign-list li:hover {
-  transform: translateX(4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  transform: translateX(6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.16);
 }
 
 .recipe-box {
-  margin-left: 40px;
-  margin-top: 45px;
-  padding: 36px 32px;
+  margin: 60px auto 0 auto;
+  padding: 46px 40px;
   width: 100%;
-  max-width: 780px;
+  max-width: 820px;
   background: #fff7ed;
-  border-radius: 20px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.09);
+  border-radius: 26px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-  border: 2px solid #f2c49a;
-  animation: fadeUp 0.5s ease;
+  border: 2px solid #ffb77a;
+  animation: fadeUp 0.6s ease;
 }
 
 .recipe-title {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 12px;
-  color: #c65000;
-  font-weight: 700;
+  color: #cc5200;
+  font-weight: 800;
 }
 
 .recipe-subtext {
   font-size: 1.15rem;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   color: #6a523d;
-  line-height: 1.45;
+  line-height: 1.6;
 }
 
 .recipe-btn {
-  padding: 15px 34px;
-  background: linear-gradient(145deg, #d35400, #be4a00);
+  padding: 16px 38px;
+  background: linear-gradient(145deg, #d35400, #b84400);
   color: white;
   border: none;
   font-size: 1.2rem;
-  font-weight: 600;
-  border-radius: 14px;
+  font-weight: 700;
+  border-radius: 16px;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(211, 84, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(211, 84, 0, 0.35);
   transition: 0.25s ease;
 }
+
+.recipe-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(211, 84, 0, 0.45);
+}
+
 
 .recipe-btn:hover {
   transform: translateY(-3px);
@@ -195,4 +200,128 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ================= API GENERATED RECIPE (ISOLATED STYLES) ================= */
+
+.api-recipe-box {
+  margin: 70px auto 0 auto;
+  padding: 60px 80px;
+
+  width: 100%;
+  max-width: 1200px;        /* ✅ Wider but still clean */
+  background: #fff7ed;
+
+  border-radius: 30px;
+  border: 2px solid #ffb77a;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+
+  text-align: center;
+  animation: fadeUp 0.6s ease;
+}
+
+.api-recipe-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 26px;
+  color: #cc5200;
+  letter-spacing: 0.5px;
+}
+
+.api-recipe-content {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.api-recipe-section {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #c44b00;
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+
+.api-recipe-text {
+  font-size: 1.15rem;     /* ✅ Bigger for readability */
+  line-height: 1.85;
+  color: #4a3522;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.api-recipe-text li {
+  margin-left: 28px;
+  margin-bottom: 10px;
+  list-style: disc;
+}
+
+.api-recipe-btn {
+  margin-top: 36px;
+  padding: 16px 44px;
+
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-radius: 16px;
+
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(145deg, #d35400, #b84400);
+  color: white;
+
+  box-shadow: 0 10px 26px rgba(211, 84, 0, 0.35);
+  transition: 0.25s ease;
+}
+
+.api-recipe-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(211, 84, 0, 0.45);
+}
+
+.api-loader {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #cc5200;
+  text-align: center;
+}
+
+.api-error {
+  font-size: 1.1rem;
+  color: red;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ✅ Mobile Safety */
+@media (max-width: 768px) {
+  .api-recipe-box {
+    padding: 38px 24px;
+    margin-top: 50px;
+  }
+
+  .api-recipe-title {
+    font-size: 2rem;
+  }
+
+  .api-recipe-section {
+    font-size: 1.3rem;
+  }
+
+  .api-recipe-text {
+    font-size: 1.05rem;
+  }
+}
+
+.api-recipe-box {
+  height: auto;
+  overflow: visible;
+}
+
+.api-recipe-content ul {
+  padding-left: 20px;
+}
+
+.api-recipe-content {
+  overflow: visible;
+  height: auto;
+  max-height: none;
 }

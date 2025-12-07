@@ -1,28 +1,40 @@
-import Ingredients from "./Ingredients";
+import { useEffect, useState } from "react";
 
-export default function Recipe(props)
-{
-    const InElements=props.ingredientsList.map((ing) => (
-      <Ingredients key={ing} name={ing} />
-    ));
+export default function Recipe({ ingredientsList }) {
+  const [recipe, setRecipe] = useState("");
+  const [loading, setLoading] = useState(true);
 
-    return (props.ingredientsList.length>0 && (
-        <div className="main-ign-container">
-          <h1>Ingredients in hand:</h1>
+  useEffect(() => {
+    async function getRecipe() {
+      const prompt = `Give me a simple recipe using these ingredients: ${ingredientsList.join(", ")}`;
 
-          <ul className="ign-list">{InElements}</ul>
+      const res = await fetch(
+        "https://api-inference.huggingface.co/models/google/flan-t5-base",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_HF_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            inputs: prompt,
+          }),
+        }
+      );
 
-          {props.ingredientsList.length>4 && (
-            <div className="recipe-box">
-              <h2 className="recipe-title">Ready for a Recipe?</h2>
-              <p className="recipe-subtext">
-                Generate a delicious recipe using your list of ingredients.
-              </p>
-              <button className="recipe-btn" onClick={props.get}>
-                Get a Recipe →
-              </button>
-            </div>
-          )}
-        </div>
-      ))
+      const data = await res.json();
+      setRecipe(data[0]?.generated_text || "No recipe found");
+      setLoading(false);
+    }
+
+    getRecipe();
+  }, [ingredientsList]);
+
+  return (
+    <div className="recipe-box">
+      <h2>Recipe ✨</h2>
+
+      {loading ? <p>Loading recipe...</p> : <p>{recipe}</p>}
+    </div>
+  );
 }

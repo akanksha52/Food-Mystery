@@ -1,15 +1,17 @@
 import { useState } from "react";
 import Ing from "./IngForm";
-import Recipe from "./Recipe";
+import List from "./List";
+import Recipe from './Recipe'
 
 export default function Main() {
   const [ingredient, setIngredient]=useState("");
   const [ingredientsList, setIngredientsList]=useState([]);
+  const [showRecipe, setShowRecipe]=useState(false);
 
   const [recipeUI, setRecipeUI] = useState(null);
 
   function GetRecipe() {
-    setRecipeUI(<h1>DDDDDDD</h1>);
+    setShowRecipe((prev) => !prev)
   }
 
   function AddIngredients(event) {
@@ -34,12 +36,14 @@ export default function Main() {
         add={AddIngredients}
       />
 
-      <Recipe 
+      <List 
         ingredientsList={ingredientsList} 
         get={GetRecipe} 
       />
       
-      {recipeUI}
+      {showRecipe && (<Recipe ingredientsList={ingredientsList} />)}
     </div>
   );
 }
+
+

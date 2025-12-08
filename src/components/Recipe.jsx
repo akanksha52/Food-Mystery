@@ -5,62 +5,72 @@ export default function Recipe({ ingredientsList }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const safeIngredients = Array.isArray(ingredientsList)
+    ? ingredientsList
+    : typeof ingredientsList === "string"
+    ? ingredientsList.split(",")
+    : [];
+
   async function getRecipe() {
     try {
+      console.log("getRecipe() called with:", safeIngredients);
+
       setLoading(true);
       setError("");
+      setRecipe("");
 
       const prompt = `
-Create a detailed cooking recipe using these ingredients: ${ingredientsList.join(", ")}.
+      You are an assistant that receives a list of ingredients: ${safeIngredients.join(", ")} and suggests a recipe the user could make.
 
-Return the recipe in clean MARKDOWN format with:
-- A title at the top
-- ## Ingredients
-- ## Instructions (numbered steps)
-- ## Tips (optional)
+      Return the recipe in clean MARKDOWN format with:
+      - A title at the top
+      - ## Ingredients
+      - ## Instructions (numbered steps)
+      - ## Tips (optional)
 
-Do NOT use HTML. Use only Markdown.
-`;
+      Do NOT use HTML. Use only Markdown.`;
 
-      const res = await fetch(
-        "https://api.groq.com/openai/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_GROQ_KEY}`,
-          },
-          body: JSON.stringify({
-            model: "llama-3.1-8b-instant",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.7,
-            max_tokens: 600,
-          }),
-        }
-      );
-
-      const data = await res.json();
+      const res = await fetch("http://localhost:5000/api/recipe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
 
       if (!res.ok) {
-        setError(data?.error?.message || "Failed to generate recipe.");
-        setLoading(false);
-        return;
+        throw new Error("Backend request failed");
       }
 
-      const text = data?.choices?.[0]?.message?.content || "";
+      const data = await res.json();
+      console.log("BACKEND DATA:", data);
+
+      let text = "";
+
+      if (data?.choices?.[0]?.message?.content) {
+        text = data.choices[0].message.content;
+      } else if (data?.content) {
+        text = data.content;
+      } else if (typeof data === "string") {
+        text = data;
+      } else {
+        console.warn("No recipe text found in backend response");
+      }
+
       setRecipe(text);
       setLoading(false);
     } catch (err) {
-      setError("Network error while generating recipe.");
+      console.error("Frontend Error:", err);
+      setError(err.message || "Network error");
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    if (ingredientsList.length > 0) {
+    if (safeIngredients.length > 0) {
       getRecipe();
     }
-  }, [ingredientsList]);
+  }, [safeIngredients.join(",")]);
 
   return (
     <div className="api-recipe-box">
@@ -75,7 +85,6 @@ Do NOT use HTML. Use only Markdown.
           className="api-recipe-content"
           dangerouslySetInnerHTML={{
             __html: recipe
-              // ✅ Markdown → HTML conversion
               .replace(/^### (.*$)/gim, "<h3>$1</h3>")
               .replace(/^## (.*$)/gim, "<h2>$1</h2>")
               .replace(/^# (.*$)/gim, "<h1>$1</h1>")
@@ -87,7 +96,7 @@ Do NOT use HTML. Use only Markdown.
         />
       )}
 
-      {!loading && ingredientsList.length > 0 && (
+      {!loading && safeIngredients.length > 0 && (
         <button className="api-recipe-btn" onClick={getRecipe}>
           🔄 Regenerate Recipe
         </button>
